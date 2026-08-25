@@ -86,10 +86,69 @@
     </div>
   </main>
 
+  <!-- Fondo oscuro del Modal Exprés -->
+  <div id="expressModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeExpressModal()">&times;</button>
+      
+      <div class="modal-header">
+        <h2 id="modalTitle">Crear PDF Exprés</h2>
+        <p>Ingresa los datos del evento para generar tu invitación interactiva.</p>
+      </div>
+
+      <form id="expressForm" onsubmit="generatePDF(event)">
+        <div class="input-group">
+          <label for="quinceaneraName">Nombre de la Quinceañera</label>
+          <input type="text" id="quinceaneraName" placeholder="Ej. Brianna" required>
+        </div>
+
+        <div class="input-group">
+          <label for="eventDate">Fecha y Hora</label>
+          <input type="datetime-local" id="eventDate" required>
+        </div>
+
+        <div class="input-group">
+          <label for="locationUrl">Link de Google Maps (Recepción)</label>
+          <input type="url" id="locationUrl" placeholder="https://maps.app.goo.gl/..." required>
+        </div>
+
+        <div class="input-group">
+          <label for="whatsappRsvp">Tu WhatsApp (Para confirmaciones)</label>
+          <input type="tel" id="whatsappRsvp" placeholder="52..." required>
+        </div>
+
+        <button type="submit" class="btn-submit-express">Pagar $249 y Descargar PDF</button>
+      </form>
+    </div>
+  </div>
+
   <script>
+    // Lógica para el Modal
+    const modal = document.getElementById('expressModal');
+    const modalTitle = document.getElementById('modalTitle');
+
     function openExpressModal(designName) {
-      // Aquí conectaremos la automatización del PDF más adelante
-      alert("Iniciando configuración Exprés para: " + designName);
+      modalTitle.innerText = "Diseño " + designName + " - PDF Exprés";
+      modal.style.display = 'flex';
+      
+      // Delay para la animación
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10);
+    }
+
+    function closeExpressModal() {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    }
+
+    // Lógica para procesar formulario
+    function generatePDF(event) {
+      event.preventDefault(); 
+      const name = document.getElementById('quinceaneraName').value;
+      alert(`¡Procesando diseño para ${name}! Aquí conectaremos el pago y la descarga del PDF.`);
     }
   </script>
 </body>

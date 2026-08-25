@@ -3,59 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invytia | Invitaciones Digitales</title>
+  <title>Invytia | Invitaciones Exclusivas de XV Años</title>
+  <!-- Fuentes Premium de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Hero Section -->
+  <!-- Header / Hero Section -->
   <header class="hero">
-    <h1>Invitaciones Digitales que Enamoran</h1>
-    <p>Elige tu diseño favorito. Personalízalo en PDF al instante o solicita tu sitio web interactivo con un asesor.</p>
+    <div class="brand-logo">INVYTIA</div>
+    <h1>Colección Exclusiva de XV Años</h1>
+    <p>Diseños interactivos de alto impacto para un evento inolvidable. Elige la versión PDF de entrega inmediata o diseña tu experiencia web personalizada con un asesor.</p>
   </header>
 
   <!-- Catálogo -->
   <main class="catalog-container">
-    <h2>Nuestros Diseños</h2>
-
     <div class="cards-grid">
       
-      <!-- Card 1: Demo Boda -->
+      <!-- Card 1: Paquete Estándar (Brianna) -->
       <div class="invitation-card">
         <div class="phone-mockup">
-          <!-- Reemplaza el src con la URL de tu repositorio demo en GitHub Pages -->
-          <iframe src="https://tu-usuario.github.io/demo-boda/" loading="lazy" title="Demo Boda Elegante"></iframe>
+          <div class="iphone-notch"></div>
+          <iframe src="https://invytia.github.io/XV-BRIANNA/" loading="lazy" title="Diseño Brianna - Estándar"></iframe>
         </div>
         <div class="card-info">
-          <h3>Boda Clásica Elegante</h3>
-          <p class="tag">Boda / Romántico</p>
+          <h3>Diseño Brianna</h3>
+          <p class="tag">Paquete Estándar</p>
           <div class="card-actions">
-            <button class="btn-express" onclick="openExpressModal('Boda Clásica Elegante')">
-              PDF Exprés ($249 MXN)
-            </button>
-            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20la%20versión%20web%20del%20diseño%20Boda%20Clásica" target="_blank" class="btn-custom">
-              Web con Asesor
+            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20el%20Paquete%20Estándar%20web%20del%20diseño%20Brianna" target="_blank" class="btn-premium">
+              Cotizar Web con Asesor
             </a>
+            <button class="btn-express" onclick="openExpressModal('Brianna')">
+              Crear PDF Exprés ($249 MXN)
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Demo XV Años -->
-      <div class="invitation-card">
+      <!-- Card 2: Paquete Premium (Liah) -->
+      <div class="invitation-card highlight-card">
         <div class="phone-mockup">
-          <!-- Reemplaza el src con tu otro repositorio demo -->
-          <iframe src="https://tu-usuario.github.io/demo-xv/" loading="lazy" title="Demo XV Años"></iframe>
+          <div class="iphone-notch"></div>
+          <iframe src="https://invytia.github.io/XV-LIAH/" loading="lazy" title="Diseño Liah - Premium"></iframe>
         </div>
         <div class="card-info">
-          <h3>XV Años Glow</h3>
-          <p class="tag">XV Años / Moderno</p>
+          <h3>Diseño Liah</h3>
+          <p class="tag gold-text">Paquete Premium</p>
           <div class="card-actions">
-            <button class="btn-express" onclick="openExpressModal('XV Años Glow')">
-              PDF Exprés ($249 MXN)
-            </button>
-            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20la%20versión%20web%20del%20diseño%20XV%20Glow" target="_blank" class="btn-custom">
-              Web con Asesor
+            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20el%20Paquete%20Premium%20web%20del%20diseño%20Liah" target="_blank" class="btn-premium">
+              Cotizar Web con Asesor
             </a>
+            <button class="btn-express" onclick="openExpressModal('Liah')">
+              Crear PDF Exprés ($249 MXN)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Paquete Premium Concierge (Liz Giselle) -->
+      <div class="invitation-card">
+        <div class="phone-mockup">
+          <div class="iphone-notch"></div>
+          <iframe src="https://invytia.github.io/XV-LIZ-GISELLE/?p=4" loading="lazy" title="Diseño Liz Giselle - Concierge"></iframe>
+        </div>
+        <div class="card-info">
+          <h3>Diseño Liz Giselle</h3>
+          <p class="tag">Paquete Premium Concierge</p>
+          <div class="card-actions">
+            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20el%20Paquete%20Concierge%20web%20del%20diseño%20Liz%20Giselle" target="_blank" class="btn-premium">
+              Cotizar Web con Asesor
+            </a>
+            <button class="btn-express" onclick="openExpressModal('Liz Giselle')">
+              Crear PDF Exprés ($249 MXN)
+            </button>
           </div>
         </div>
       </div>
@@ -65,8 +88,8 @@
 
   <script>
     function openExpressModal(designName) {
-      alert("Aquí abriremos el formulario exprés para: " + designName);
-      // Próximo paso: conectar la lógica del configurador
+      // Aquí conectaremos la automatización del PDF más adelante
+      alert("Iniciando configuración Exprés para: " + designName);
     }
   </script>
 </body>

@@ -6,8 +6,8 @@
 }
 
 :root {
-  --bg-dark: #070709; /* Negro profundo */
-  --card-bg: #111114; /* Gris ultra oscuro */
+  --bg-dark: #070709; 
+  --card-bg: #111114; 
   --text-main: #F3F4F6;
   --text-muted: #9CA3AF;
   --gold-light: #E8D0A5;
@@ -88,7 +88,6 @@ body {
   border-color: rgba(232, 208, 165, 0.2);
 }
 
-/* Destacar el paquete central/Premium */
 .highlight-card {
   position: relative;
   background: linear-gradient(180deg, #15151a 0%, #0d0d10 100%);
@@ -107,7 +106,6 @@ body {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
-/* La "Isla Dinámica" / Notch del iPhone */
 .iphone-notch {
   position: absolute;
   top: 10px;
@@ -275,7 +273,6 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Formulario */
 .input-group {
   margin-bottom: 1.5rem;
   text-align: left;
@@ -323,4 +320,123 @@ body {
 
 .btn-submit-express:hover {
   opacity: 0.9;
+}
+
+/* ========================================================
+   DISEÑO BASE DE LA PLANTILLA PDF (OCULTA)
+======================================================== */
+.pdf-design {
+  width: 540px; 
+  height: 960px; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.pdf-content {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.pdf-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 4px;
+  color: var(--gold-light);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.pdf-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.pdf-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+}
+
+.pdf-date-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px 40px;
+  border-radius: 12px;
+  margin-bottom: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.pdf-date-text {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.pdf-button {
+  width: 80%;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.map-btn {
+  background: #ffffff;
+}
+
+.wa-btn {
+  background: var(--gold-gradient);
+}
+
+/* ========================================================
+   TEMAS DINÁMICOS PARA EL PDF
+======================================================== */
+/* Tema Brianna (Tonos Rose Gold / Femenino elegante) */
+.theme-brianna {
+  background: linear-gradient(135deg, #2a1625 0%, #070709 100%);
+}
+.theme-brianna .pdf-subtitle {
+  color: #e8a5b8; /* Toque rosado */
+}
+.theme-brianna .pdf-content {
+  border-color: rgba(232, 165, 184, 0.3);
+}
+
+/* Tema Liah (Tonos Dark Gold / Muy sobrio) */
+.theme-liah {
+  background: linear-gradient(135deg, #1f1a0f 0%, #070709 100%);
+}
+.theme-liah .pdf-subtitle {
+  color: #e8d0a5;
+}
+
+/* Tema Liz Giselle (Tonos Azul Medianoche / Concierge Lux) */
+.theme-liz {
+  background: linear-gradient(135deg, #0f172a 0%, #070709 100%);
+}
+.theme-liz .pdf-subtitle {
+  color: #cbd5e1; /* Plata / Gris claro */
+}
+.theme-liz .pdf-content {
+  border-color: rgba(203, 213, 225, 0.3);
+}
+.theme-liz .wa-btn {
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%); /* Botón plateado */
 }

@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invytia | Invitaciones Exclusivas de XV Años</title>
+  
   <!-- Fuentes Premium de Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
+
+  <!-- Librerías para generación de PDF (Sin servidores) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -36,7 +42,8 @@
             <a href="https://wa.me/525577108077?text=Hola,%20me%20interesa%20el%20Paquete%20Estándar%20web%20del%20diseño%20Brianna" target="_blank" class="btn-premium">
               Cotizar Web con Asesor
             </a>
-            <button class="btn-express" onclick="openExpressModal('Brianna')">
+            <!-- Pasamos el nombre y la clase CSS del tema -->
+            <button class="btn-express" onclick="openExpressModal('Brianna', 'theme-brianna')">
               Crear PDF Exprés ($249 MXN)
             </button>
           </div>
@@ -56,7 +63,7 @@
             <a href="https://wa.me/525577108077?text=Hola,%20me%20interesa%20el%20Paquete%20Premium%20web%20del%20diseño%20Liah" target="_blank" class="btn-premium">
               Cotizar Web con Asesor
             </a>
-            <button class="btn-express" onclick="openExpressModal('Liah')">
+            <button class="btn-express" onclick="openExpressModal('Liah', 'theme-liah')">
               Crear PDF Exprés ($249 MXN)
             </button>
           </div>
@@ -76,7 +83,7 @@
             <a href="https://wa.me/525577108077?text=Hola,%20me%20interesa%20el%20Paquete%20Concierge%20web%20del%20diseño%20Liz%20Giselle" target="_blank" class="btn-premium">
               Cotizar Web con Asesor
             </a>
-            <button class="btn-express" onclick="openExpressModal('Liz Giselle')">
+            <button class="btn-express" onclick="openExpressModal('Liz Giselle', 'theme-liz')">
               Crear PDF Exprés ($249 MXN)
             </button>
           </div>
@@ -122,16 +129,41 @@
     </div>
   </div>
 
+  <!-- Plantilla Oculta para el PDF (Proporción 9:16 para celular) -->
+  <div id="pdf-template-container" style="position: absolute; left: -9999px; top: -9999px;">
+    <!-- Esta etiqueta cambiará de clase dinámicamente según el diseño elegido -->
+    <div id="pdf-template" class="pdf-design">
+      <div class="pdf-content">
+        <h4 class="pdf-subtitle">MIS XV AÑOS</h4>
+        <h1 id="pdf-name" class="pdf-title">Nombre</h1>
+        <p class="pdf-text">Te invito a celebrar este día tan especial</p>
+        
+        <div class="pdf-date-box">
+          <p id="pdf-date" class="pdf-date-text">Fecha y Hora</p>
+        </div>
+
+        <div class="pdf-button map-btn">Ver Ubicación</div>
+        <div class="pdf-button wa-btn">Confirmar Asistencia</div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Lógica para el Modal
+    // Variables globales para recordar qué diseño se eligió
+    let currentSelectedDesign = '';
+    let currentSelectedTheme = '';
+
     const modal = document.getElementById('expressModal');
     const modalTitle = document.getElementById('modalTitle');
 
-    function openExpressModal(designName) {
-      modalTitle.innerText = "Diseño " + designName + " - PDF Exprés";
+    // Abre el modal y guarda el tema
+    function openExpressModal(designName, themeClass) {
+      currentSelectedDesign = designName;
+      currentSelectedTheme = themeClass;
+      
+      modalTitle.innerText = "Diseño " + designName + " - Exprés";
       modal.style.display = 'flex';
       
-      // Delay para la animación
       setTimeout(() => {
         modal.classList.add('show');
       }, 10);
@@ -144,11 +176,77 @@
       }, 300);
     }
 
-    // Lógica para procesar formulario
-    function generatePDF(event) {
+    // Lógica maestra de Generación de PDF
+    async function generatePDF(event) {
       event.preventDefault(); 
-      const name = document.getElementById('quinceaneraName').value;
-      alert(`¡Procesando diseño para ${name}! Aquí conectaremos el pago y la descarga del PDF.`);
+      
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = "Generando PDF...";
+      submitBtn.disabled = true;
+
+      try {
+        // 1. Extraer datos
+        const name = document.getElementById('quinceaneraName').value;
+        const dateInput = document.getElementById('eventDate').value;
+        const mapsUrl = document.getElementById('locationUrl').value;
+        const whatsappPhone = document.getElementById('whatsappRsvp').value;
+
+        // Formatear la fecha
+        const dateObj = new Date(dateInput);
+        const formattedDate = dateObj.toLocaleDateString('es-MX', { 
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' 
+        });
+
+        // 2. Inyectar datos en la plantilla
+        document.getElementById('pdf-name').innerText = name;
+        document.getElementById('pdf-date').innerText = formattedDate.toUpperCase();
+
+        // 3. Aplicar el tema (fondo dinámico) a la plantilla
+        const template = document.getElementById('pdf-template');
+        template.className = `pdf-design ${currentSelectedTheme}`;
+
+        // Pequeña pausa para asegurar que el navegador renderice el nuevo fondo antes de la foto
+        await new Promise(resolve => setTimeout(resolve, 50));
+
+        // 4. Capturar con html2canvas
+        const canvas = await html2canvas(template, { 
+          scale: 2, 
+          useCORS: true,
+          backgroundColor: '#070709'
+        });
+        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+
+        // 5. Crear el documento jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: [108, 192] // Tamaño celular
+        });
+
+        // Pegar imagen
+        doc.addImage(imgData, 'JPEG', 0, 0, 108, 192);
+
+        // 6. Configurar botones interactivos invisibles
+        doc.link(11, 134, 86, 12, { url: mapsUrl });
+        
+        const waMessage = `¡Hola! Confirmo mi asistencia a los XV de ${name}.`;
+        const waLink = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(waMessage)}`;
+        doc.link(11, 150, 86, 12, { url: waLink });
+
+        // 7. Descargar
+        doc.save(`Invitacion_XV_${name.replace(/\s+/g, '_')}.pdf`);
+        
+        closeExpressModal();
+
+      } catch (error) {
+        console.error("Error generando el PDF:", error);
+        alert("Hubo un error al crear la invitación. Inténtalo de nuevo.");
+      } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
     }
   </script>
 </body>

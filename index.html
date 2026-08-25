@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invytia | Invitaciones Digitales</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Invitaciones Digitales que Enamoran</h1>
+    <p>Elige tu diseño favorito. Personalízalo en PDF al instante o solicita tu sitio web interactivo con un asesor.</p>
+  </header>
+
+  <!-- Catálogo -->
+  <main class="catalog-container">
+    <h2>Nuestros Diseños</h2>
+
+    <div class="cards-grid">
+      
+      <!-- Card 1: Demo Boda -->
+      <div class="invitation-card">
+        <div class="phone-mockup">
+          <!-- Reemplaza el src con la URL de tu repositorio demo en GitHub Pages -->
+          <iframe src="https://tu-usuario.github.io/demo-boda/" loading="lazy" title="Demo Boda Elegante"></iframe>
+        </div>
+        <div class="card-info">
+          <h3>Boda Clásica Elegante</h3>
+          <p class="tag">Boda / Romántico</p>
+          <div class="card-actions">
+            <button class="btn-express" onclick="openExpressModal('Boda Clásica Elegante')">
+              PDF Exprés ($249 MXN)
+            </button>
+            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20la%20versión%20web%20del%20diseño%20Boda%20Clásica" target="_blank" class="btn-custom">
+              Web con Asesor
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Demo XV Años -->
+      <div class="invitation-card">
+        <div class="phone-mockup">
+          <!-- Reemplaza el src con tu otro repositorio demo -->
+          <iframe src="https://tu-usuario.github.io/demo-xv/" loading="lazy" title="Demo XV Años"></iframe>
+        </div>
+        <div class="card-info">
+          <h3>XV Años Glow</h3>
+          <p class="tag">XV Años / Moderno</p>
+          <div class="card-actions">
+            <button class="btn-express" onclick="openExpressModal('XV Años Glow')">
+              PDF Exprés ($249 MXN)
+            </button>
+            <a href="https://wa.me/52XXXXXXXXXX?text=Hola,%20me%20interesa%20la%20versión%20web%20del%20diseño%20XV%20Glow" target="_blank" class="btn-custom">
+              Web con Asesor
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function openExpressModal(designName) {
+      alert("Aquí abriremos el formulario exprés para: " + designName);
+      // Próximo paso: conectar la lógica del configurador
+    }
+  </script>
+</body>
+</html>
